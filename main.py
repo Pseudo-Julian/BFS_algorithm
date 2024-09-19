@@ -88,13 +88,20 @@ def main():
 def shortest_path(source, target):
     way = []
     prot = QueueFrontier()
-    for id_s in people[source]['movies']:
-        for id in movies[id_s]['stars']:
-            prot.add(id)
+    for id_movies in people[source]['movies']:
+        for id_star in movies[id_movies]['stars']:
+            prot.add(id_star)
         if prot.contains_state(str(target)):
-            return [(id_s, target)]
-
-        prot.remove()
+            return [(id_movies, target)]
+        return [(id_movies, target), (shortest_path(prot.remove(), target))]
+        #else:
+            #node = prot.remove()
+            #for next_id_movies in people[node]['movies']:
+                #node = prot.remove()
+                #for next_id_star in movies[next_id_movies]['stars']:
+                    #prot.add(next_id_star)
+                #if prot.contains_state(str(target)):
+                    #return [(id_movies, node), (next_id_movies, target)]
 
     raise NotImplementedError
 

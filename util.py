@@ -18,7 +18,7 @@ class StackFrontier():
         for node in self.frontier:
             i += 1
             if state in node:
-                print(node)
+                print(f'{node}*_*')
 
         return any(state == node for node in self.frontier)
 
@@ -42,4 +42,5 @@ class QueueFrontier(StackFrontier):
         else:
             node = self.frontier[0]
             self.frontier = self.frontier[1:]
+            print(f'{node} is del')
             return node
