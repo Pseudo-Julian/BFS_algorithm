@@ -52,9 +52,6 @@ def load_data(directory):
                 pass
 
 
-way = []
-
-
 def main():
     if len(sys.argv) > 2:
         sys.exit("Usage: python degrees.py [directory]")
@@ -77,7 +74,6 @@ def main():
 
     if path is None:
         print("Not connected.")
-        print(path)
     else:
         degrees = len(path)
         print(f"{degrees} degrees of separation.")
@@ -89,49 +85,18 @@ def main():
             print(f"{i + 1}: {person1} and {person2} starred in {movie}")
 
 
-list_not = []
-
-
 def shortest_path(source, target):
-    new_source = ''
+    way = []
     prot = QueueFrontier()
-    id_movie_glob = ""
-    for id_movies in people[source]['movies']:
-        id_movie_glob = id_movies
-        for id_star in movies[id_movies]['stars']:
-            prot.add(id_star)
+    for id_s in people[source]['movies']:
+        for id in movies[id_s]['stars']:
+            prot.add(id)
         if prot.contains_state(str(target)):
-            way.append((id_movies, target))
-            print('FACK')
-            print(way, 'WWWWWWW**')
-            return way
+            return [(id_s, target)]
 
-    if not prot.contains_state(str(target)):
+        prot.remove()
 
-        for person in prot.frontier:
-            if str(person) in list_not:
-                new_source = prot.remove()
-            if str(person) not in list_not:
-                new_source = prot.remove()
-                list_not.append(new_source)
-                break
-
-        if len(list_not) == 0:
-            try:
-                new_source = prot.remove()
-                list_not.append(new_source)
-            except Exception as e:
-                print(f'Exception caught: {e}')
-                return None
-        print(list_not, "/////////////55")
-        way.append((id_movie_glob, new_source))
-
-    if all(item in list_not for item in prot.frontier):
-        return None
-    elif not prot.frontier == list_not:
-        shortest_path(new_source, target)
-
-    # raise NotImplementedError
+    raise NotImplementedError
 
 
 def person_id_for_name(name):
