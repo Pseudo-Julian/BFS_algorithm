@@ -131,7 +131,7 @@ def shortest_path(source, target):
     elif not prot.frontier == list_not:
         shortest_path(new_source, target)
 
-    # raise NotImplementedError
+
 
 
 def person_id_for_name(name):

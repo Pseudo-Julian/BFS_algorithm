@@ -11,7 +11,7 @@ class StackFrontier():
 
     def add(self, node):
         self.frontier.append(node)
-        print(f'{self.frontier}///')
+        print(f'{self.frontier}//')
 
     def contains_state(self, state):
         i = 0
