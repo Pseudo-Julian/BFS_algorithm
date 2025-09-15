@@ -61,6 +61,8 @@ def main():
     print("Loading data...")
     load_data(directory)
     print("Data loaded.")
+    print(people)
+    print(movies)
 
     source = person_id_for_name(input("Name: "))
     if source is None:
@@ -84,9 +86,29 @@ def main():
             print(f"{i + 1}: {person1} and {person2} starred in {movie}")
 
 
-def shortest_path(source, target):
+# def shortest_path_for_sp(source, target, )
 
-    N = Node()
+
+def shortest_path(source, target, parent=None, action=None):
+    frontier = QueueFrontier()
+    start = Node(state=source, parent=parent, action=action)
+    frontier.add(start)
+
+    list_of_neighbors = neighbors_for_person(source)
+
+    while not frontier.empty():
+        node = frontier.remove()
+        if node.state == target:
+            path = []
+            while node.parent is not None:
+                path.append((node.action, node.state))
+                node = node.parent
+            path.reverse()
+            return path
+        for movie_id, person_id in list_of_neighbors:
+            if frontier.contains_state(person_id):
+                continue
+            shortest_path(person_id, target, start, movie_id)
 
     # TODO
     raise NotImplementedError
