@@ -89,15 +89,16 @@ def main():
 # def shortest_path_for_sp(source, target, )
 
 
-def shortest_path(source, target, parent=None, action=None):
+def shortest_path(source, target):
+    start = Node(state=source, parent=None, action=None)
     frontier = QueueFrontier()
-    start = Node(state=source, parent=parent, action=action)
     frontier.add(start)
 
-    list_of_neighbors = neighbors_for_person(source)
+    explored = set()
 
     while not frontier.empty():
         node = frontier.remove()
+
         if node.state == target:
             path = []
             while node.parent is not None:
@@ -105,13 +106,14 @@ def shortest_path(source, target, parent=None, action=None):
                 node = node.parent
             path.reverse()
             return path
-        for movie_id, person_id in list_of_neighbors:
-            if frontier.contains_state(person_id):
-                continue
-            shortest_path(person_id, target, start, movie_id)
 
-    # TODO
-    raise NotImplementedError
+        explored.add(node.state)
+
+        for movie_id, person_id in neighbors_for_person(node.state):
+            if not frontier.contains_state(person_id) and person_id not in explored:
+                child = Node(state=person_id, parent=node, action=movie_id)
+                frontier.add(child)
+    return None
 
 
 def person_id_for_name(name):
