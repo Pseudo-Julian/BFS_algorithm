@@ -17,6 +17,7 @@ Using BFS, the algorithm finds the **shortest path** (smallest number of movies)
 ---
 
 ##  Project Structure
+```
 ├── degrees.py # Main program (core BFS logic)
 ├── util.py # Contains Node, StackFrontier, and QueueFrontier classes
 ├── Data/
@@ -24,6 +25,7 @@ Using BFS, the algorithm finds the **shortest path** (smallest number of movies)
 │ ├── movies.csv # List of movies (id, title, year)
 │ └── stars.csv # Actor-movie relations
 └── README.md
+```
 ---
 
 ## Requirements
