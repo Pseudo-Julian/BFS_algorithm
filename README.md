@@ -1,4 +1,3 @@
-# BFS_algorithm
 #  Degrees of Separation — BFS Search
 
 This project implements a **Breadth-First Search (BFS)** algorithm to find the shortest connection between two actors based on the movies they have starred in together.  
